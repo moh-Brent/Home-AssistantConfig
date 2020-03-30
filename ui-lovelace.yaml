@@ -1,0 +1,25 @@
+# Add to the version number at the end of URL when updating.
+resources:
+  - type: module
+    url: /local/custom-lovelace/compact-custom-header/compact-custom-header.js?v=0.0.1
+  - type: module
+    url: /local/community/mini-media-player/mini-media-player-bundle.js?v=1.5.1
+  - type: module
+    url: /local/community/calendar-card/calendar-card.js
+  - type: module
+    url: /local/community/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js?v=0.5.0
+  - type: module
+    url: /local/community/button-entity-row/button-entity-row.js
+  - type: module
+    url: /local/custom-lovelace/compact-custom-header/compact-custom-header.js?v=0.0.1
+  - type: module
+    url: /local/custom_lovelace/google_keep_card/google-keep-card.js
+  - type: module
+    url: /community_plugin/button-entity-row/button-entity-row.js
+  - type: module
+    url: /local/community/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
+  - type: module
+    url: /local/community/xiaomi-vacuum-card/xiaomi-vacuum-card.js
+  - type: module
+    url: /local/community/content-card-remote-control.js
+    title: My Awesome Home

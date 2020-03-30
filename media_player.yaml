@@ -1,0 +1,57 @@
+################################################################################
+##                       MEDIA PLAYER                                         ##
+################################################################################
+#media_player:
+  - platform: plex
+
+  - platform: cast
+
+  - platform: samsungtv_custom
+    host: 192.168.0.35
+    port: 8001
+    name: 'Samsung TV Living Room'
+    mac: C4:57:6E:AC:3B:61
+    sourcelist: '{"JBL Soundbar": "KEY_HDMI1", "RaspberryPi": "KEY_HDMI2", "Chromecast": "KEY_HDMI3"}'
+#    source_list: '{"TV":"KEY_SOURCE+KEY_LEFT+KEY_LEFT+KEY_ENTER","Chromecast":"KEY_SOURCE+KEY_LEFT+KEY_LEFT+KEY_RIGHT+KEY_ENTER","Manual":"KEY_SOURCE+KEY_LEFT+KEY_LEFT+KEY_RIGHT+KEY_RIGHT+KEY_ENTER"}'
+#    applist: '{"Netflix": "11101200001", "YouTube": "111299001912", "Spotify": "3201606009684"}'
+
+  - platform: androidtv
+    host: 192.168.0.36
+    name: "JBL Link Soundbar"
+    adb_server_ip: 192.168.0.20
+    adb_server_port: 5037
+    exclude_unnamed_apps: true
+    apps:
+      "Android TV Launcher": "Home"
+      tunein: "TuneIn Radio"
+      nz.co.tvnz.ondemand.tv: "TVNZ On Demand"
+      com.google.android.youtube.tvkids: "YouTube Kids"
+      nz.co.lightbox.androidtv: "LightBox"
+      com.clearchannel.iheartradio.tv: "iHeart Radio"
+      com.disney.disneyplus: "Disney+"
+
+  - platform: androidtv
+    host: 192.168.0.37
+    name: "Freeview"
+    adb_server_ip: 192.168.0.20
+    adb_server_port: 5037
+    exclude_unnamed_apps: true
+    apps:
+      "Android TV Launcher": "Home"
+      tunein: "TuneIn Radio"
+      com.ssofts.dvd: "Freeview TV"
+      nz.co.tvnz.ondemand.tv: "TVNZ On Demand"
+      com.google.android.youtube.tvkids: "YouTube Kids"
+      nz.co.lightbox.androidtv: "LightBox"
+      com.clearchannel.iheartradio.tv: "iHeart Radio"
+      com.disney.disneyplus: "Disney+"
+
+  - platform: androidtv
+    host: 192.168.0.54
+    name: "Mi Box WiFi"
+    adb_server_ip: 192.168.0.20
+    adb_server_port: 5037
+    exclude_unnamed_apps: true
+    apps:
+      com.disney.disneyplus: "Disney+"
+      com.google.android.youtube.tvkids: "YouTube Kids"
