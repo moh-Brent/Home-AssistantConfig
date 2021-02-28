@@ -461,7 +461,7 @@
 #    ssl: true
 
 #  - platform: pushbullet
-#    api_key: o.gO2NpZhl69nUQlnF1nTfJY52lwSuYO9D
+#    api_key: !secret pushbullet_api_key
 
 - platform: torque
   email: brent@mccabe.kiwi
