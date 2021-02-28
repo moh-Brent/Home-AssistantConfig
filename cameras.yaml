@@ -1,0 +1,113 @@
+- platform: zoneminder
+
+#- platform: ezviz_cloud
+#  username: !secret ezviz_app_username
+#  password: !secret ezviz_app_password
+#  region: us
+#  cameras:
+#    F30191048:
+#      username: admin
+#      password: !secret ezviz_F30191048_password
+
+- platform: local_file
+  file_path: /config/www/pictures/faces/people.jpg
+  name: deepstack_latest_person
+
+- platform: local_file
+  file_path: /config/www/pictures/faces/carpeople.jpg
+  name: deepstack_car_people
+
+- platform: local_file
+  file_path: /config/www/pictures/faces/brent_mccabe_1.jpg
+  name: deepstack_brent_mccabe
+
+- platform: ffmpeg
+  name: ffmpeg Xiaomi Test Camera
+  input: -rtsp_transport tcp -i rtsp://192.168.0.60:8554/unicast
+
+- platform: ffmpeg
+  name: ffmpeg Test Driveway
+  input: -rtsp_transport tcp -i rtsp://admin:123456@192.168.0.65/live/ch0
+
+- platform: local_file
+  file_path: /config/snapshots/deepstack_object_ffmpeg_xiaomi_test_camera_latest.jpg
+  name: deepstack_latest_object
+- platform: local_file
+  file_path: /config/snapshots/deepstack_face_ffmpeg_xiaomi_test_camera_latest.jpg
+  name: deepstack_latest_face
+
+#- platform: xiaomi
+#  name: Xiaomi Front Door
+#  host: 192.168.0.60:8554
+#  model: 'xiaofang'
+#  password: !secret xiaofang_camera_password
+#  ffmpeg_arguments: '-vf scale=800:450'
+
+
+- platform: generic
+  still_image_url: local/wyze.jpg
+#  still_image_url: http://192.168.0.60:8554/local/camera.jpg
+  stream_source: rtsp://admin:123456@192.168.0.65/live/ch0
+  name: Generic Test Driveway
+
+#- platform: generic
+#  name: doods cam
+#  still_image_url: https://192.168.0.20:8123/local/doods/doods.jpg
+
+#- platform: generic
+#  name: DOODS Brents Phone MI9
+#  still_image_url: https://192.168.0.20:8123/local/doods/brents_phone_mi9_latest.jpg
+
+#- platform: generic
+#  name: DOODS Server Room Phone
+#  still_image_url: https://192.168.0.20:8123/local/doods/server_room_phone_latest.jpg
+
+- platform: mqtt
+  topic: "zoneminder/2"
+  name: "Driveway_alerts"
+
+#  Use this with Wall Panel
+#- platform: mjpeg
+#  mjpeg_url: http://192.168.0.73:2971/video/stream
+#  name: Remote - Living Room
+
+- platform: xiaomi_cloud_map_extractor
+  name: Xiaomi Vacuum Map Lounge
+  host: !secret xiaomi_vacuum_host
+  token: !secret vacuum_xiaomi_miio.token
+  username: !secret xiaomi_cloud_username
+  password: !secret xiaomi_cloud_password
+  draw: ['all']
+  texts:
+    - text: "Room 1"
+      x: 25
+      y: 25
+      color: [125, 20, 213]
+    - text: "Room 2"
+      x: 25
+      y: 75
+      color: [125, 20, 213, 127]
+#      font: "FreeSans.ttf"
+      font_size: 25
+  attributes:
+    - calibration_points
+    - charger
+    - goto
+    - goto_path
+    - goto_predicted_path
+    - image
+    - is_empty
+    - map_name
+    - no_go_areas
+    - no_mopping_areas
+    - obstacles
+    - path
+    - room_numbers
+    - rooms
+    - vacuum_position
+    - vacuum_room
+    - walls
+    - zones
+  scan_interval:
+    seconds: 10
+  auto_update: true

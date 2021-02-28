@@ -1,0 +1,14 @@
+#group:
+radio:
+  name: Radio
+  entities:
+  - input_select.radio_station
+  - input_select.googlehome_radio
+  - script.radio
+  - input_number.volume_radio
+camera_cast:
+  name: Camera Cast
+  entities:
+  - input_select.camera_select
+  - input_select.chromecast_cctv
+  - script.cameracast

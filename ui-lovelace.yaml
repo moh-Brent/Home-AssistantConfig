@@ -1,4 +1,6 @@
 # Add to the version number at the end of URL when updating.
+title: My Awesome Home
+
 resources:
   - type: module
     url: /local/custom-lovelace/compact-custom-header/compact-custom-header.js?v=0.0.1
@@ -7,19 +9,38 @@ resources:
   - type: module
     url: /local/community/calendar-card/calendar-card.js
   - type: module
+    url: /local/community/button-card/button-card.js
+  - type: module
+    url: /local/community/stack-in-card/stack-in-card.js
+  - type: module
     url: /local/community/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js?v=0.5.0
   - type: module
     url: /local/community/button-entity-row/button-entity-row.js
   - type: module
-    url: /local/custom-lovelace/compact-custom-header/compact-custom-header.js?v=0.0.1
-  - type: module
-    url: /local/custom_lovelace/google_keep_card/google-keep-card.js
-  - type: module
-    url: /community_plugin/button-entity-row/button-entity-row.js
+    url: /local/community/lovelace-google-keep-card/google-keep-card.js
   - type: module
     url: /local/community/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
   - type: module
     url: /local/community/xiaomi-vacuum-card/xiaomi-vacuum-card.js
   - type: module
     url: /local/community/content-card-remote-control.js
-    title: My Awesome Home
+  - type: module
+    url: /local/community/honeycomb-menu/honeycomb-menu.js
+  - type: module
+    url: /local/community/upcoming-media-card/upcoming-media-card.js?v=0.1.1
+  - type: module
+    url: /local/community/surveillance-card/surveillance-card.js?v=0
+  - type: module
+    url: /local/community/mini-graph-card/mini-graph-card-bundle.js?v=0.9.4
+  - type: module
+    url: /local/community/circle-sensor-card.js?v=0
+  - type: module
+    url: /local/community/ha-floorplan/floorplan.js
+  - type: module
+    url: /local/community/now-playing-card/now-playing-card.js
+  - type: module
+    url: /local/community/text-element/text-element.js?v=0
+  - type: module
+    url: /local/community/group-element/group-element-bundle.js?v=0.7.0
+  - type: module
+    url: /local/community/sidebar-card/sidebar-card.js?v=0.0.1

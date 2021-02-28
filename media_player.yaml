@@ -2,55 +2,95 @@
 ##                       MEDIA PLAYER                                         ##
 ################################################################################
 #media_player:
-  - platform: plex
+#The plex platform for the media_player integration does not support platform setup. Please remove it from your config.
+#  - platform: plex
+#    entity_namespace: ‘plex’
+#    include_non_clients: true
+#    scan_interval: 5
+#    show_all_controls: true
+#    use_custom_entity_ids: true
+#    use_episode_art: true
+#    remove_unavailable_clients: false
+#    client_removal_interval: 600
+
+
+  - platform: ytube_music_player
+# if your speaker is called media_player.speaker123, add speaker123 here to preselect it.
+    speakers:
+      - kitchen_speaker
+      - master_medroom_speaker
 
   - platform: cast
 
+  - platform: samsungtv_encrypted
+    host: !secret samsung_tv_ip
+    token: !secret samsungtv_LivingRoom_samsungtv_encrypted_token
+    sessionid: 1
+    port: 8080
+    name: 'Samsung TV - Living Room - samsungtv_encrypted'
+
   - platform: samsungtv_custom
-    host: 192.168.0.35
+    host: !secret samsung_tv_ip
     port: 8001
-    name: 'Samsung TV Living Room'
+    name: 'Samsung TV - Living Room - samsungtv_custom'
     mac: C4:57:6E:AC:3B:61
-    sourcelist: '{"JBL Soundbar": "KEY_HDMI1", "RaspberryPi": "KEY_HDMI2", "Chromecast": "KEY_HDMI3"}'
+#    sourcelist: '{"JBL Soundbar": "KEY_HDMI1", "RaspberryPi": "KEY_HDMI2", "Chromecast": "KEY_HDMI3"}'
 #    source_list: '{"TV":"KEY_SOURCE+KEY_LEFT+KEY_LEFT+KEY_ENTER","Chromecast":"KEY_SOURCE+KEY_LEFT+KEY_LEFT+KEY_RIGHT+KEY_ENTER","Manual":"KEY_SOURCE+KEY_LEFT+KEY_LEFT+KEY_RIGHT+KEY_RIGHT+KEY_ENTER"}'
 #    applist: '{"Netflix": "11101200001", "YouTube": "111299001912", "Spotify": "3201606009684"}'
 
+  - platform: smartir
+    name: 'Samsung TV - Living Room - smartir'
+    device_code: 2
+    controller_data: remote.living_room_ir_remote
+    power_sensor: binary_sensor.samsung_tv_living_room_ping
+
+  - platform: smartir
+    name: 'Samsung TV - Living Room - smartir - MI Remote'
+    device_code: 2
+    controller_data: remote.xiaomi_miio_192_168_0_32
+    power_sensor: binary_sensor.samsung_tv_living_room_ping
+
   - platform: androidtv
-    host: 192.168.0.36
-    name: "JBL Link Soundbar"
-    adb_server_ip: 192.168.0.20
-    adb_server_port: 5037
-    exclude_unnamed_apps: true
+    host: !secret JBL_Link_Soundbar_Android_TV_ip
+    name: "JBL Link Soundbar - androidtv"
+    device_class: androidtv
+#    adb_server_ip: 192.168.0.20
+#    adb_server_port: 5037
+    exclude_unnamed_apps: false
     apps:
-      "Android TV Launcher": "Home"
-      tunein: "TuneIn Radio"
+      hdmi1: "HDMI1"
+      com.google.android.tv: "TV"
+      tunein.player: "TuneIn Radio"
       nz.co.tvnz.ondemand.tv: "TVNZ On Demand"
       com.google.android.youtube.tvkids: "YouTube Kids"
-      nz.co.lightbox.androidtv: "LightBox"
       com.clearchannel.iheartradio.tv: "iHeart Radio"
       com.disney.disneyplus: "Disney+"
 
   - platform: androidtv
-    host: 192.168.0.37
-    name: "Freeview"
-    adb_server_ip: 192.168.0.20
-    adb_server_port: 5037
-    exclude_unnamed_apps: true
+    host: !secret FreeView_Android_TV_ip
+    name: "Freeview - androidtv"
+    device_class: androidtv
+#    adb_server_ip: 192.168.0.20
+#    adb_server_port: 5037
+    exclude_unnamed_apps: false
     apps:
       "Android TV Launcher": "Home"
-      tunein: "TuneIn Radio"
-      com.ssofts.dvd: "Freeview TV"
+      tunein.player: "TuneIn Radio"
+      com.ssofts.dvb: "Freeview TV"
       nz.co.tvnz.ondemand.tv: "TVNZ On Demand"
       com.google.android.youtube.tvkids: "YouTube Kids"
-      nz.co.lightbox.androidtv: "LightBox"
       com.clearchannel.iheartradio.tv: "iHeart Radio"
       com.disney.disneyplus: "Disney+"
+      nz.co.sparksport.androidtv: "Spark Sport"
+      com.accuweather.android: "accuweather"
+      com.android.vending: "Google Play"
 
   - platform: androidtv
-    host: 192.168.0.54
-    name: "Mi Box WiFi"
-    adb_server_ip: 192.168.0.20
-    adb_server_port: 5037
+    host: !secret Mi_Box_Play_Room_Android_TV_ip
+    name: "Mi Box WiFi - androidtv"
+    device_class: androidtv
+#    adb_server_ip: 192.168.0.20
+#    adb_server_port: 5037
     exclude_unnamed_apps: true
     apps:
       com.disney.disneyplus: "Disney+"

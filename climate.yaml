@@ -1,0 +1,17 @@
+#climate:
+  - platform: smartir
+    name: AC Living Room
+    unique_id: ac_living_room
+    device_code: 1
+    controller_data: remote.living_room_ir_remote
+    temperature_sensor: sensor.aqara_thp_kitchen_temperature
+    humidity_sensor: sensor.aqara_thp_kitchen_humidity
+#    power_sensor: binary_sensor.ac_power
+  - platform: smartir
+    name: AC Living Room MI Remote SmartIR
+#    unique_id: ac_living_room_miremote_smartir
+    device_code: 3120
+    controller_data: remote.xiaomi_miio_192_168_0_32
+    temperature_sensor: sensor.aqara_thp_kitchen_temperature
+    humidity_sensor: sensor.aqara_thp_kitchen_humidity
+#    power_sensor: binary_sensor.ac_power

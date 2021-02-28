@@ -1,0 +1,156 @@
+#rest_command:
+androidtv_freeview_doorbell:
+  url: http://192.168.0.37:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "Home Assistant",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Someone is at the front door",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e"
+    }
+androidtv_mibox3_doorbell:
+  url: http://192.168.0.40:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "Home Assistant",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Someone is at the front door",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e"
+    }
+androidtv_jblsoundbar_doorbell:
+  url: http://192.168.0.36:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "Home Assistant",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Someone is at the front door",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e",
+    "media": { "web": {
+      "uri": "http://192.168.0.20:8082/zm/index.php?view=watch&mid=2", "width": 640, "height": 480
+      }}
+    }
+androidtv_jblsoundbar_washing_finished:
+  url: http://192.168.0.36:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "Home Assistant",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Washing has finished",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e"
+    }
+androidtv_freeview_washing_finished:
+  url: http://192.168.0.37:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "Home Assistant",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Washing has finished",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e"
+    }
+cctv_front_door_androidtv_jblsoundbar:
+  url: http://192.168.0.36:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "CCTV",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Front Door",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e",
+    "media": { "web": {
+      "uri": "http://192.168.0.20:8082/zm/index.php?view=watch&mid=2", "width": 640, "height": 480
+      }}
+    }
+cctv_driveway_androidtv_jblsoundbar1:
+  url: http://192.168.0.36:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "CCTV",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Driveway",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e",
+    "media": { "web": {
+      "uri": "http://192.168.0.20:8082/zm/index.php?view=watch&mid=2", "width": 640, "height": 480
+      }}
+cctv_driveway_androidtv_jblsoundbar:
+  url: http://192.168.0.36:7979/notify
+  content_type: 'application/json'
+  verify_ssl: false
+  method: 'post'
+  timeout: 20
+  payload: >
+    {
+    "duration": 10,
+    "position": 0,
+    "title": "CCTV",
+    "titleColor": "#50BFF2",
+    "titleSize": 20,
+    "message": "Driveway",
+    "messageColor": "#fbf5f5",
+    "messageSize": 14,
+    "backgroundColor": "#0f0e0e",
+    "media": { "web": {
+      "uri": "rtsp://admin:123456@192.168.0.65/live/ch0", "width": 640, "height": 480
+      }}
+    }

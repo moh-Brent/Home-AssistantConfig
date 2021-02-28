@@ -1,0 +1,26 @@
+sensor.plex_online:
+  icon: mdi:plex
+  entity_picture: /local/pictures/remote/plex_round.png
+binary_sensor.nuc_server:
+  entity_picture: /local/pictures/linuxmint.png
+sensor.portainer_online:
+  entity_picture: /local/pictures/portainer_256.png
+sensor.sonarr_online:
+  entity_picture: /local/pictures/sonarr.png
+sensor.radarr_online:
+  entity_picture: /local/pictures/radarr.png
+sensor.transmission_online:
+  entity_picture: /local/pictures/transmission.png
+sensor.ombi_online:
+  entity_picture: /local/pictures/ombi_256.png
+script.radio:
+  friendly_name: Start Playing
+  icon: mdi:play
+script.stop_chromecast_radio:
+  friendly_name: Stop
+  icon: mdi:stop
+sensor.google:
+  friendly_name: Google
+  icon: mdi:google
+light.18b905cec091_192_168_0_81:
+  friendly_name: Deck Lights

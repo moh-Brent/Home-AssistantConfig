@@ -1,0 +1,520 @@
+#sensor:
+
+################################################################################
+##                       SENSORS                                              ##
+################################################################################
+- platform: template
+  sensors:
+    jbl_link_soundbar_app_playing:
+      friendly_name: "JBL Link Soundbar App Playing"
+      value_template: >-
+        {% if is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'Netflix') %}
+          netflix
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'TV') %}
+          freeview
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'Disney+') %}
+          disneyplus
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'Plex') %}
+          plex
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'Android TV Launcher') %}
+          android_tv_launcher
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'standby') %}
+          standby
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'idle') %}
+          standby
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'TVNZ On Demand') %}
+          tvnz_ondemand
+        {% elif is_state_attr('media_player.jbl_link_soundbar', 'app_name', 'off') %}
+          android_tv
+        {% else %}
+          android_tv
+        {% endif %}
+- platform: template
+  sensors:
+    freeview_app_playing:
+      friendly_name: "Freeview App Playing"
+      value_template: >-
+        {% if is_state_attr('media_player.freeview_androidtv', 'app_name', 'tFreeview TV') %}
+          freeview
+        {% elif is_state_attr('media_player.freeview_androidtv', 'app_name', 'Android TV Launcher') %}
+          android_tv_launcher
+        {% elif is_state_attr('media_player.freeview_androidtv', 'app_name', 'standby') %}
+          standby
+        {% endif %}
+- platform: template
+  sensors:
+    brightness_sun:
+      friendly_name: "Sunshine"
+      # Elevations for New Zealand Summer +13H
+      # Use this website - https://keisan.casio.com/exec/system/1224682277
+      # Latitude -36.868149
+      # Longitude 174.866721
+      # 09:00 elevation 29%
+      # 10:30 elevation 47%
+      # 11:00 elevation 52%
+      # 12:00 elevation 63%
+      # 17:00 elevation 41%
+      # 18:00 elevation 29%
+      # 20:15, elevation ??% - I do it this early so it isn't completely dark and you can
+      # still see the detail
+      value_template: >-
+        {% if state_attr('Sun.sun', 'elevation') > 29 %}
+          0900
+        {% elif state_attr('Sun.sun', 'elevation') > 47 %}
+          1030
+        {% elif state_attr('Sun.sun', 'elevation') > 52 %}
+          1100
+        {% elif state_attr('Sun.sun', 'elevation') > 63 %}
+          1200
+        {% elif state_attr('Sun.sun', 'elevation') > 41 %}
+          1700
+        {% elif state_attr('Sun.sun', 'elevation') > 29 %}
+          1800
+        {% else %}
+          2015
+        {% endif %}
+- platform: template
+  sensors:
+    mi9_battery_percentage:
+      friendly_name: "Mi9 Battery Percentage"
+      unit_of_measurement: "%"
+      device_class: battery
+      value_template: >-
+        {% if is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-10') %}
+          00
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-20') %}
+          20
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-30') %}
+          20
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-40') %}
+          40
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-50') %}
+          40
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-60') %}
+          60
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-70') %}
+          60
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-80') %}
+          80
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-90') %}
+          80
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery') %}
+          100
+        {% endif %}
+      entity_picture_template: >-
+        {% if is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-10') %}
+          /local/pictures/battery/battery-0-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-20') %}
+          /local/pictures/battery/battery-20-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-30') %}
+          /local/pictures/battery/battery-20-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-40') %}
+          /local/pictures/battery/battery-40-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-50') %}
+          /local/pictures/battery/battery-40-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-60') %}
+          /local/pictures/battery/battery-60-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-70') %}
+          /local/pictures/battery/battery-60-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-80') %}
+          /local/pictures/battery/battery-80-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery-90') %}
+          /local/pictures/battery/battery-80-charging-load-status-png.png
+        {% elif is_state_attr('sensor.mi_9_battery_level', 'icon', 'mdi:battery') %}
+          /local/pictures/battery/battery-100-charging-load-status-png.png
+        {% endif %}
+- platform: template
+  sensors:
+    mi9_battery_charging:
+      friendly_name: "Mi9 Battery Charging"
+      device_class: battery
+      value_template: >-
+        {% if is_state('binary_sensor.mi_9_is_charging', 'on') %}
+          plugged_in
+        {% elif is_state('binary_sensor.mi_9_is_charging', 'off' ) %}
+          not_plugged_in
+        {% endif %}
+- platform: template
+  sensors:
+    claudia_battery_percentage:
+      friendly_name: "Claudia Battery Percentage"
+      unit_of_measurement: "%"
+      device_class: battery
+      value_template: >-
+        {% if is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-10') %}
+          00
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-20') %}
+          20
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-30') %}
+          20
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-40') %}
+          40
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-50') %}
+          40
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-60') %}
+          60
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-70') %}
+          60
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-80') %}
+          80
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery-90') %}
+          80
+        {% elif is_state_attr('sensor.pixel_xl_battery_level', 'icon', 'mdi:battery') %}
+          100
+        {% endif %}
+- platform: template
+  sensors:
+    claudia_battery_charging:
+      friendly_name: "Claudia Battery Charging"
+      device_class: battery
+      value_template: >-
+        {% if is_state('binary_sensor.pixel_xl_is_charging', 'on') %}
+          plugged_in
+        {% elif is_state('binary_sensor.pixel_xl_is_charging', 'off' ) %}
+          not_plugged_in
+        {% endif %}
+- platform: template
+  sensors:
+    front_door_yale_lock_state:
+      friendly_name: "Front Door Yale Lock State"
+      value_template: >-
+        {% if is_state('binary_sensor.yale_front_door_open', 'on') and is_state('lock.yale_front_door', 'unlocked')  %}
+          open_unlocked
+        {% elif is_state('binary_sensor.yale_front_door_open', 'off') and is_state('lock.yale_front_door', 'unlocked')  %}
+          closed_unlocked
+        {% elif is_state('binary_sensor.yale_front_door_open', 'on') and is_state('lock.yale_front_door', 'locked')  %}
+          open_locked
+        {% elif is_state('binary_sensor.yale_front_door_open', 'off') and is_state('lock.yale_front_door', 'locked')  %}
+          closed_locked
+        {% endif %}
+
+################################################################################
+##                       Netgear Enhanced                                     ##
+################################################################################
+#  - platform: netgear_enhanced
+#    host: !secret netgear_router_ip
+#    username: !secret netgear_router_login
+#    password: !secret netgear_router_password
+#    resources:
+#      - firmware
+#      - check_app_fw
+#      - get_device_config_info
+#      - access_control_on
+####      - traffic_meter
+#      - traffic_meter_on
+#      - traffic_meter_options
+#      - get_lan_config_info
+#      - get_wan_ip_info
+#      - parental_control_on
+#      - mac_address
+#      - dns_masq
+#      - info
+#      - supported_features
+#      - speed_test_result
+#      - qos_enabled
+#      - bw_control
+#      - 2g_guest_wifi_on
+#      - 5g_guest_wifi_on
+#      - 2g_wpa_key
+#      - 5g_wpa_key
+#      - 2g_wifi_info
+#      - 5g_wifi_info
+#      - get_channel
+#      - 2g_guest_wifi_info
+#      - 5g_guest_wifi_info
+#      - get_smart_conn
+
+- platform: zoneminder
+  include_archived: false
+
+- platform: template
+  sensors:
+    google:
+      value_template: '{% if is_state("binary_sensor.google", "on") %} {{ states.binary_sensor.google.attributes.round_trip_time_avg }} {% else %}Offline{% endif %}'
+      unit_of_measurement: "ms"
+
+- platform: template
+  sensors:
+    vacuum_status:
+      friendly_name: Status
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "Status: {{ states.vacuum.xiaomi_vacuum_cleaner.attributes.status }}"
+      icon_template: >
+        {% set val =  states.vacuum.xiaomi_vacuum_cleaner.attributes.status  %}
+        {% if val == 'Charging' %}
+          mdi:battery-charging
+        {% elif val == 'Cleaning' %}
+          mdi:move-resize
+        {% elif val == 'Returning home' %}
+          mdi:keyboard-return
+        {% elif val == 'Idle' %}
+          mdi:dots-horizontal
+        {% elif val == 'Paused' %}
+          mdi:pause-circle
+        {% else %}
+          mdi:help-circle
+        {% endif %}
+    vacuum_fan_speed:
+      friendly_name: Fan Speed
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "Mode: {{ states.vacuum.xiaomi_vacuum_cleaner.attributes.fan_speed }}"
+      icon_template: "mdi:fan"
+    vacuum_battery:
+      friendly_name: Vacuum Battery
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "Battery: {{ states.vacuum.xiaomi_vacuum_cleaner.attributes.battery_level }}"
+      unit_of_measurement: "%"
+      icon_template: "{{ states.vacuum.xiaomi_vacuum_cleaner.attributes.battery_icon }}"
+    vacuum_cleaning_time:
+      friendly_name: Time of Last Cycle
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "{{ states.vacuum.xiaomi_vacuum_cleaner.attributes.cleaning_time }}"
+      icon_template: "mdi:timer"
+    vacuum_cleaned_area:
+      friendly_name: Area of Last Cycle
+      unit_of_measurement: "m ²"
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "{{ states.vacuum.xiaomi_vacuum_cleaner.attributes.cleaned_area }}"
+      icon_template: "mdi:ruler"
+    vacuum_cleanmainbrush:
+      friendly_name: Replace main brush
+      unit_of_measurement: "h"
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "Main Brush: {{ states.vacuum.xiaomi_vacuum_cleaner.attributes.main_brush_left }}"
+      icon_template: "mdi:screwdriver"
+    vacuum_cleansidebrush:
+      friendly_name: Replace side brush
+      unit_of_measurement: "h"
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "Side brush: {{ states.vacuum.xiaomi_vacuum_cleaner.attributes.side_brush_left }}"
+      icon_template: "mdi:screwdriver"
+    vacuum_cleanfilter:
+      friendly_name: Replace filter
+      unit_of_measurement: "h"
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "Filter: {{ states.vacuum.xiaomi_vacuum_cleaner.attributes.filter_left }}"
+      icon_template: "mdi:screwdriver"
+    vacuum_sensordirtyleft:
+      friendly_name: Replace filter
+      unit_of_measurement: "h"
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "Sensor: {{ states.vacuum.xiaomi_vacuum_cleaner.attributes.sensor_dirty_left }}"
+      icon_template: "mdi:screwdriver"
+    vacuum_do_not_disturb:
+      friendly_name: Do Not Disturb
+      #        entity_id:
+      #          - vacuum.xiaomi_vacuum_cleaner
+      value_template: "{{ states.vacuum.xiaomi_vacuum_cleaner.attributes.do_not_disturb }}"
+      icon_template: >
+        {% set val =  states.vacuum.xiaomi_vacuum_cleaner.attributes.do_not_disturb  %}
+        {% if val == 'on' %}
+          mdi:do-not-disturb
+        {% else %}
+          mdi:do-not-disturb-off
+        {% endif %}
+    vacuum_operation:
+      value_template: "Operation"
+    vacuum_accessories:
+      value_template: "Maintenance"
+
+- platform: mqtt
+  state_topic: "wallpanel/mywallpanel/sensor/battery"
+  name: "WallPanel Battery Level"
+  unit_of_measurement: "%"
+  value_template: ""
+
+- platform: mqtt
+  state_topic: "wallpanel/mywallpanel/sensor/light"
+  name: "WallPanel Light Level"
+  unit_of_measurement: "lx"
+  value_template: ""
+
+## Weather climatecell.co
+- platform: climacell
+  api_key: !secret climacell_api_version_4
+  #    api_key: Usa6PKUWnBxBo5QP8g0Zv23lVm6G2XPd
+  #    name: test
+  latitude: !secret latitude
+  longitude: !secret longitude
+  units: metric
+  timelines:
+    - name: "" #Realtime
+      timestep: "1m"
+      forecast_observations: 1
+      fields:
+        - temperatureMax
+        - temperatureMin
+        - temperatureApparent
+        - temperature
+        #          - moon_phase
+        - feels_like
+        - humidity
+        - wind_speed
+        - wind_direction
+        - wind_gust
+        - pressure
+        - precipitationIntensity
+        - precipitation_type
+        - visibility
+        - cloud_cover
+        - weather_condition
+        - pm25
+        - pm10
+        - o3
+        - no2
+        - co
+        - so2
+        - epa_aqi
+        - epa_health_concern
+        - pollen_tree
+        - pollen_weed
+        - pollen_grass
+        - fire_index
+      update: auto
+      scan_interval:
+        # At least one of these must be specified:
+        days: 0
+        hours: 0
+        minutes: 15
+        seconds: 0
+        milliseconds: 0
+    - name: "" #Daily
+      timestep: "1d"
+      forecast_observations: 5
+      fields:
+        - temperature
+        - temperatureMin
+        - temperatureMax
+        - precipitationIntensityMin
+        - precipitationIntensityMax
+        - precipitation_probability
+        - weather_condition
+      scan_interval:
+        # At least one of these must be specified:
+        days: 0
+        hours: 4
+        minutes: 0
+        seconds: 0
+        milliseconds: 0
+
+- platform: sonarr_upcoming_media
+  api_key: !secret sonarr_api
+  host: !secret nucserver_ip
+  port: 8989
+  days: 30
+  ssl: false
+  max: 10
+- platform: radarr_upcoming_media
+  api_key: !secret radarr_api
+  host: !secret nucserver_ip
+  port: 7878
+  days: 30
+  ssl: false
+  max: 10
+- platform: plex_recently_added
+  token: !secret plex.token
+  host: !secret nucserver_ip
+  port: 32400
+- platform: command_line
+  name: "PLEX Online"
+  command: response=$(curl -LIk -m 3 http://192.168.0.20:32400 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: "{{ value }}"
+- platform: command_line
+  name: "Portainer Online"
+  command: response=$(curl -LIk -m 3 http://192.168.0.20:9000 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: "{{ value }}"
+- platform: command_line
+  name: "Transmission Online"
+  command: response=$(curl -LIk -m 3 http://192.168.0.20:9091 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: "{{ value }}"
+- platform: command_line
+  name: "Sonarr Online"
+  command: response=$(curl -LIk -m 3 http://192.168.0.20:8989 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: "{{ value }}"
+- platform: command_line
+  name: "Radarr Online"
+  command: response=$(curl -LIk -m 3 http://192.168.0.20:7878 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: "{{ value }}"
+- platform: command_line
+  name: "Ombi Online"
+  command: response=$(curl -LIk -m 3 http://192.168.0.20:3579 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: "{{ value }}"
+
+#  - platform: tautulli
+#    api_key: !secret tautulli_api_key
+#    host: hassio
+#    ssl: true
+
+#  - platform: pushbullet
+#    api_key: o.gO2NpZhl69nUQlnF1nTfJY52lwSuYO9D
+
+- platform: torque
+  email: brent@mccabe.kiwi
+
+- platform: feedparser
+  name: Stuff News Feed
+  feed_url: "https://www.stuff.co.nz/rss"
+  date_format: "%a, %d %b %H:%M"
+  inclusions:
+    - title
+    - link
+    - description
+    - image
+    - language
+    - pubDate
+  exclusions:
+    - language
+- platform: feedparser
+  name: The News Room Feed
+  feed_url: "https://www.newsroom.co.nz/feed/rss"
+  date_format: "%a, %d %b %H:%M"
+  inclusions:
+    - title
+    - link
+    - description
+    - image
+    - language
+    - pubDate
+  exclusions:
+    - language
+- platform: feedparser
+  name: New Zealand Herald Top Stories
+  feed_url: "http://rss.nzherald.co.nz/rss/xml/nzhtsrsscid_000000698.xml"
+  date_format: "%a, %d %b %H:%M"
+  inclusions:
+    - title
+    - link
+    - description
+    - image
+    - language
+    - pubDate
+  exclusions:
+    - language
+- platform: feedparser
+  name: New Zealand Herald National
+  feed_url: "http://rss.nzherald.co.nz/rss/xml/nzhrsscid_000000001.xml"
+  date_format: "%a, %d %b %H:%M"
+  inclusions:
+    - title
+    - link
+    - description
+    - image
+    - language
+    - pubDate
+  exclusions:
+    - language

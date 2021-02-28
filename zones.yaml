@@ -1,0 +1,16 @@
+#zone:
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 40
+    icon: mdi:home
+  - name: Spark
+    latitude: -36.847476
+    longitude: 174.757672
+    radius: 50
+    icon: mdi:account-multiple
+  - name: Daycare
+    latitude: -36.8893553
+    longitude: 174.8304826
+    radius: 30
+    icon: mdi:school

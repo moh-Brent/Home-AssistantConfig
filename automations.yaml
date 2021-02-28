@@ -1,22 +1,429 @@
-################################################################################
-##           Theme for day and night
-################################################################################
-- alias: 'Set HA theme for day and night'
+- alias: Set HA Theme for Day and Night
   trigger:
-    - platform: homeassistant
-      event: start
-    - platform: state
-      entity_id: sun.sun
-      to: above_horizon
-    - platform: state
-      entity_id: sun.sun
-      to: below_horizon
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: sun.sun
+    to: above_horizon
+  - platform: state
+    entity_id: sun.sun
+    to: below_horizon
   action:
-    - service_template: frontend.set_theme
-      data_template:
-        name: >
-          {% if states.sun.sun.state == "above_horizon" %}
-            BlueNight
-          {% else %}
-            GreyNight
-          {% endif %}
+  - service_template: frontend.set_theme
+    data_template:
+      name: "{% if states.sun.sun.state == \"above_horizon\" %}\n  GoogleDarkTheme\n\
+        {% else %}\n  GoogleDarkTheme\n{% endif %}\n"
+  id: 25dbace6e12a4b199173081040b9b143
+- id: '1586550888412'
+  alias: Door Bell Front Door - 08:00 - 22:00
+  description: ''
+  trigger:
+  - device_id: 9954057791744419a60d542070e2582d
+    discovery_id: 0x00158d00028f5853 action_single
+    domain: mqtt
+    platform: device
+    subtype: single
+    type: action
+  - device_id: 9954057791744419a60d542070e2582d
+    discovery_id: 0x00158d00028f5853 action_double
+    domain: mqtt
+    platform: device
+    subtype: double
+    type: action
+  - device_id: 9954057791744419a60d542070e2582d
+    discovery_id: 0x00158d00028f5853 action_hold
+    domain: mqtt
+    platform: device
+    subtype: hold
+    type: action
+  condition:
+  - after: '8:00'
+    before: '22:00'
+    condition: time
+  action:
+  - data:
+      volume_level: 0.6
+    entity_id:
+    - media_player.kitchen_speaker
+    - media_player.master_bedroom_speaker
+    - media_player.kitchenhassioff7477a8b6cad842
+    service: media_player.volume_set
+  - data:
+      entity_id:
+      - media_player.kitchen_speaker
+      - media_player.master_bedroom_speaker
+      - media_player.kitchenhassioff7477a8b6cad842
+      message: There is someone at the front door
+    service: tts.google_translate_say
+  mode: single
+- id: '1586550888413'
+  alias: Door Bell Front Door - 22:00 - 08:00
+  description: ''
+  trigger:
+  - device_id: 9954057791744419a60d542070e2582d
+    discovery_id: 0x00158d00028f5853 action_single
+    domain: mqtt
+    platform: device
+    subtype: single
+    type: action
+  - device_id: 9954057791744419a60d542070e2582d
+    discovery_id: 0x00158d00028f5853 action_double
+    domain: mqtt
+    platform: device
+    subtype: double
+    type: action
+  - device_id: 9954057791744419a60d542070e2582d
+    discovery_id: 0x00158d00028f5853 action_hold
+    domain: mqtt
+    platform: device
+    subtype: hold
+    type: action
+  condition:
+  - after: '22:00'
+    before: '8:00'
+    condition: time
+  action:
+  - data:
+      volume_level: 0.2
+    entity_id:
+    - media_player.kitchen_speaker
+    - media_player.master_bedroom_speaker
+    - media_player.kitchenhassioff7477a8b6cad842
+    service: media_player.volume_set
+  - data:
+      entity_id:
+      - media_player.kitchen_speaker
+      - media_player.master_bedroom_speaker
+      - media_player.kitchenhassioff7477a8b6cad842
+      message: There is someone at the front door
+    service: tts.google_translate_say
+  mode: single
+- id: '1586635957341'
+  alias: Brent is Home
+  description: ''
+  trigger:
+  - entity_id: person.brent_mccabe
+    event: enter
+    platform: zone
+    zone: zone.home
+  condition: []
+  action:
+  - data:
+      volume_level: 0.6
+    entity_id:
+    - media_player.kitchen_speaker
+    - media_player.master_bedroom_speaker
+    service: media_player.volume_set
+  - data:
+      volume_level: 1
+    entity_id: media_player.kitchenhassioff7477a8b6cad842
+    service: media_player.volume_set
+  - data:
+      entity_id:
+      - media_player.kitchen_speaker
+      - media_player.master_bedroom_speaker
+      - media_player.kitchenhassioff7477a8b6cad842
+      message: Brint is Home
+    service: tts.google_translate_say
+- id: '1586635957342'
+  alias: Claudia is Home
+  description: ''
+  trigger:
+  - entity_id: person.claudia_mccabe
+    event: enter
+    platform: zone
+    zone: zone.home
+  condition: []
+  action:
+  - data:
+      volume_level: 0.6
+    entity_id:
+    - media_player.kitchen_speaker
+    - media_player.master_bedroom_speaker
+    service: media_player.volume_set
+  - data:
+      volume_level: 1
+    entity_id: media_player.kitchenhassioff7477a8b6cad842
+    service: media_player.volume_set
+  - data:
+      entity_id:
+      - media_player.kitchen_speaker
+      - media_player.master_bedroom_speaker
+      - media_player.kitchenhassioff7477a8b6cad842
+      message: Claudia is Home
+    service: tts.google_translate_say
+- id: '1587161039507'
+  alias: Speaker Day Volume
+  description: ''
+  trigger:
+  - at: '7:30'
+    platform: time
+  condition: []
+  action:
+  - service: media_player.volume_set
+    data:
+      data:
+        volume_level: 0.6
+    entity_id: media_player.kitchen_speaker
+  - service: media_player.volume_set
+    data:
+      data:
+        volume_level: 0.6
+    entity_id: media_player.master_bedroom_speaker
+  mode: single
+- id: '1587161130480'
+  alias: Speaker Night Volume
+  description: ''
+  trigger:
+  - at: '20:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      volume_level: 0.4
+    entity_id:
+    - media_player.kitchen_speaker
+    - media_player.master_bedroom_speaker
+    service: media_player.volume_set
+- id: '1587162840172'
+  alias: Fire Alarm - Smoke Detected
+  description: ''
+  trigger:
+  - device_id: 7d46ffad576d40c7a3a2465b14586a7f
+    domain: binary_sensor
+    entity_id: binary_sensor.heiman_fire_alarm_kitchen_smoke
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    platform: device
+    type: smoke
+  - device_id: 89fb45c871e348398ccc7cb350868ca7
+    domain: binary_sensor
+    entity_id: binary_sensor.heiman_fire_alarm_laundry_smoke
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    platform: device
+    type: smoke
+  condition: []
+  action:
+  - service: media_player.volume_set
+    data:
+      data:
+        volume_level: 1
+    entity_id: media_player.all_speakers
+  - service: media_player.play_media
+    data:
+      data:
+        media_content_id: http://192.168.0.20:8123/local/audio/alarm_ring_3.mp3
+        media_content_type: audio/mp3
+    entity_id: media_player.all_speakers
+  mode: single
+- id: '1587162840173'
+  alias: Fire Alarm - Smoke Stopped
+  description: ''
+  trigger:
+  - device_id: 7d46ffad576d40c7a3a2465b14586a7f
+    domain: binary_sensor
+    entity_id: binary_sensor.heiman_fire_alarm_kitchen_smoke
+    platform: device
+    type: no_smoke
+  - type: no_smoke
+    platform: device
+    device_id: 89fb45c871e348398ccc7cb350868ca7
+    entity_id: binary_sensor.heiman_fire_alarm_laundry_smoke
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: media_player.media_stop
+    data: {}
+    entity_id: media_player.all_speakers
+  - service: media_player.volume_set
+    data:
+      data:
+        volume_level: 0.25
+    entity_id: media_player.all_speakers
+  mode: single
+- id: '1587166637887'
+  alias: TEST - Fire Alarm
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - data:
+      volume_level: 0.6
+    entity_id:
+    - media_player.kitchen_speaker
+    - media_player.master_bedroom_speaker
+    - media_player.kitchenhassioff7477a8b6cad842
+    service: media_player.volume_set
+  - data:
+      media_content_id: http://192.168.0.20:8123/local/audio/alarm_ring_3.mp3
+      media_content_type: audio/mp3
+    entity_id:
+    - media_player.kitchen_speaker
+    - media_player.master_bedroom_speaker
+    - media_player.kitchenhassioff7477a8b6cad84
+    service: media_player.play_media
+- id: '1587378896815'
+  alias: Ella Lamp Turn Off 7am
+  description: ''
+  trigger:
+  - at: '7:00'
+    platform: time
+  condition: []
+  action:
+  - device_id: 3292d94f8d4f48bcaae970483da1c622
+    domain: light
+    entity_id: light.mibedsidelamp2_77ee
+    type: turn_off
+  mode: single
+- id: '1587899661269'
+  alias: Turn All Media OFF using Xiaomi Button - Lounge
+  description: ''
+  trigger:
+  - device_id: 4a898cdd078b47a39827ac69f3823191
+    discovery_id: 0x00158d0004050fc5 action_hold
+    domain: mqtt
+    platform: device
+    subtype: hold
+    type: action
+  condition: []
+  action:
+  - data: {}
+    service: script.turn_off_media_lounge
+  mode: single
+- id: '1587937780182'
+  alias: Turn All Media ON using Xiaomi Button - Lounge 22:00-07:00
+  description: ''
+  trigger:
+  - device_id: 4a898cdd078b47a39827ac69f3823191
+    discovery_id: 0x00158d0004050fc5 action_double
+    domain: mqtt
+    platform: device
+    subtype: double
+    type: action
+  condition:
+  - after: '22:00'
+    before: '7:00'
+    condition: time
+  action:
+  - data: {}
+    service: script.turn_on_media_lounge_night
+  mode: single
+- id: '1587937780183'
+  alias: Turn All Media ON using Xiaomi Button - Lounge 07:00-22:00
+  description: ''
+  trigger:
+  - device_id: 4a898cdd078b47a39827ac69f3823191
+    discovery_id: 0x00158d0004050fc5 action_double
+    domain: mqtt
+    platform: device
+    subtype: double
+    type: action
+  condition:
+  - after: '7:00'
+    before: '22:00'
+    condition: time
+  action:
+  - data: {}
+    service: script.turn_on_media_lounge_day
+  mode: single
+  max: 10
+- id: '1588757380706'
+  alias: Washing Machine Finished - Voice Alert
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.washer_wash_completed
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id:
+      - media_player.kitchen_speaker
+      - media_player.master_bedroom_speaker
+      - media_player.kitchenhassioff7477a8b6cad842
+      message: Washing Machine has Finished
+    entity_id: media_player.kitchen_speaker
+    service: tts.google_translate_say
+- alias: Set Radio Volume
+  trigger:
+    platform: state
+    entity_id: input_number.volume_radio
+  action:
+    service: media_player.volume_set
+    data_template:
+      entity_id: '{% if is_state("input_select.googlehome_radio", "Living Room") %}
+        media_player.living_room_speaker {% elif is_state("input_select.googlehome_radio",
+        "Kitchen") %} media_player.kitchen_speaker {% elif is_state("input_select.googlehome_radio",
+        "Master Bedroom") %} media_player.master_bedroom_speaker {% endif %}
+
+        '
+      volume_level: '{{  states.input_number.volume_radio.state  }}'
+  id: 8038b4f00505425eb4e6b6748d7cc910
+- id: '1610792018354'
+  alias: Claudia at Daycare
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.claudia_mccabe
+      zone_entity: zone.daycare
+      notify_device: a8c4a9bf068145a795bcc942aeab0d4b
+- id: '1610792328185'
+  alias: Brent Person Multi-Zone Change - App Notification
+  description: ''
+  use_blueprint:
+    path: Combie81/track-multiple-people-zones-228-automations-reduced-to-3.yaml
+    input:
+      person_entity: person.brent_mccabe
+      notify_device_1: a8c4a9bf068145a795bcc942aeab0d4b
+- id: '1610792376673'
+  alias: Claudia Person Multi-Zone Change - App Notification
+  description: ''
+  use_blueprint:
+    path: Combie81/track-multiple-people-zones-228-automations-reduced-to-3.yaml
+    input:
+      person_entity: person.claudia_mccabe
+      notify_device_1: a8c4a9bf068145a795bcc942aeab0d4b
+- id: '1613637436620'
+  alias: Ella Bedside Lamp Change to (0 0 255) Bright 100
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:30
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      brightness: 100
+      rgb_color:
+      - 0
+      - 0
+      - 255
+    entity_id: light.mibedsidelamp2_77ee
+  - repeat:
+      count: ''
+      sequence: []
+  mode: single
+- id: '1613639425317'
+  alias: Ella Bedside Lamp Change to Pink (255 0 255)
+  description: ''
+  trigger:
+  - platform: time
+    at: '19:30'
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      brightness: 255
+      rgb_color:
+      - 255
+      - 0
+      - 255
+    entity_id: light.mibedsidelamp2_77ee
+  mode: single
